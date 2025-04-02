@@ -1,0 +1,433 @@
+{
+  "info": {
+    "_postman_id": "f9a2b1c7-d3e4-5f6a-7b8c-9d0e1f2a3b4c",
+    "name": "Music Booking API",
+    "description": "API for booking artists for music events",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Auth",
+      "item": [
+        {
+          "name": "Register User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"Password123!\",\n  \"firstName\": \"John\",\n  \"lastName\": \"Doe\",\n  \"phone\": \"+1234567890\"\n}"
+            },
+            "url": {
+              "raw": "{{API_URL}}/api/v1/users",
+              "host": ["{{API_URL}}"],
+              "path": ["api", "v1", "users"]
+            },
+            "description": "Register a new user"
+          },
+          "response": []
+        },
+        {
+          "name": "Login",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"email\": \"user@example.com\",\n  \"password\": \"Password123!\"\n}"
+            },
+            "url": {
+              "raw": "{{API_URL}}/api/v1/auth/login",
+              "host": ["{{API_URL}}"],
+              "path": ["api", "v1", "auth", "login"]
+            },
+            "description": "Login and get access token"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Get All Users",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ACCESS_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{API_URL}}/api/v1/users",
+              "host": ["{{API_URL}}"],
+              "path": ["api", "v1", "users"]
+            },
+            "description": "Get all users (admin only)"
+          },
+          "response": []
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ACCESS_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{API_URL}}/api/v1/users/{{USER_ID}}",
+              "host": ["{{API_URL}}"],
+              "path": ["api", "v1", "users", "{{USER_ID}}"]
+            },
+            "description": "Get user by ID"
+          },
+          "response": []
+        },
+        {
+          "name": "Update User",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ACCESS_TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"firstName\": \"Updated\",\n  \"lastName\": \"Name\"\n}"
+            },
+            "url": {
+              "raw": "{{API_URL}}/api/v1/users/{{USER_ID}}",
+              "host": ["{{API_URL}}"],
+              "path": ["api", "v1", "users", "{{USER_ID}}"]
+            },
+            "description": "Update user information"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Artists",
+      "item": [
+        {
+          "name": "Create Artist Profile",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ACCESS_TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"{{USER_ID}}\",\n  \"stageName\": \"DJ Awesome\",\n  \"bio\": \"Award-winning DJ with 10 years of experience\",\n  \"hourlyRate\": 100,\n  \"genres\": [\"Hip Hop\", \"EDM\", \"Pop\"],\n  \"website\": \"https://www.djawesome.com\",\n  \"socialMediaLinks\": [\"https://instagram.com/djawesome\", \"https://twitter.com/djawesome\"],\n  \"mediaUrls\": [\"https://example.com/music1.mp3\"]\n}"
+            },
+            "url": {
+              "raw": "{{API_URL}}/api/v1/artists",
+              "host": ["{{API_URL}}"],
+              "path": ["api", "v1", "artists"]
+            },
+            "description": "Create new artist profile"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Artists",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_URL}}/api/v1/artists",
+              "host": ["{{API_URL}}"],
+              "path": ["api", "v1", "artists"]
+            },
+            "description": "Get all artists"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Artist by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_URL}}/api/v1/artists/{{ARTIST_ID}}",
+              "host": ["{{API_URL}}"],
+              "path": ["api", "v1", "artists", "{{ARTIST_ID}}"]
+            },
+            "description": "Get artist by ID"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Events",
+      "item": [
+        {
+          "name": "Create Event",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ACCESS_TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Summer Music Festival\",\n  \"description\": \"Annual music festival featuring top artists\",\n  \"startDate\": \"2023-08-15T18:00:00.000Z\",\n  \"endDate\": \"2023-08-15T23:00:00.000Z\",\n  \"location\": \"Central Park, New York\",\n  \"venueDetails\": \"Main Stage\",\n  \"eventPosterUrl\": \"https://example.com/poster.jpg\",\n  \"expectedAttendees\": 1000,\n  \"eventType\": \"Concert\",\n  \"organizerId\": \"{{USER_ID}}\"\n}"
+            },
+            "url": {
+              "raw": "{{API_URL}}/api/v1/events",
+              "host": ["{{API_URL}}"],
+              "path": ["api", "v1", "events"]
+            },
+            "description": "Create new event"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Events",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_URL}}/api/v1/events",
+              "host": ["{{API_URL}}"],
+              "path": ["api", "v1", "events"]
+            },
+            "description": "Get all events"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Event by ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{API_URL}}/api/v1/events/{{EVENT_ID}}",
+              "host": ["{{API_URL}}"],
+              "path": ["api", "v1", "events", "{{EVENT_ID}}"]
+            },
+            "description": "Get event by ID"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Bookings",
+      "item": [
+        {
+          "name": "Create Booking",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ACCESS_TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"userId\": \"{{USER_ID}}\",\n  \"artistId\": \"{{ARTIST_ID}}\",\n  \"eventId\": \"{{EVENT_ID}}\",\n  \"startTime\": \"2023-08-15T18:00:00.000Z\",\n  \"endTime\": \"2023-08-15T20:00:00.000Z\",\n  \"totalAmount\": 200,\n  \"specialRequirements\": \"Need additional microphones and speakers\"\n}"
+            },
+            "url": {
+              "raw": "{{API_URL}}/api/v1/bookings",
+              "host": ["{{API_URL}}"],
+              "path": ["api", "v1", "bookings"]
+            },
+            "description": "Create new booking"
+          },
+          "response": []
+        },
+        {
+          "name": "Get All Bookings",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ACCESS_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{API_URL}}/api/v1/bookings",
+              "host": ["{{API_URL}}"],
+              "path": ["api", "v1", "bookings"]
+            },
+            "description": "Get all bookings"
+          },
+          "response": []
+        },
+        {
+          "name": "Confirm Booking",
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ACCESS_TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"confirmed\"\n}"
+            },
+            "url": {
+              "raw": "{{API_URL}}/api/v1/bookings/{{BOOKING_ID}}/status",
+              "host": ["{{API_URL}}"],
+              "path": ["api", "v1", "bookings", "{{BOOKING_ID}}", "status"]
+            },
+            "description": "Confirm a booking"
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Payments",
+      "item": [
+        {
+          "name": "Create Payment",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ACCESS_TOKEN}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"bookingId\": \"{{BOOKING_ID}}\",\n  \"amount\": 200,\n  \"paymentMethod\": \"credit_card\",\n  \"paymentDetails\": {\n    \"cardLast4\": \"4242\",\n    \"cardBrand\": \"visa\"\n  }\n}"
+            },
+            "url": {
+              "raw": "{{API_URL}}/api/v1/payments",
+              "host": ["{{API_URL}}"],
+              "path": ["api", "v1", "payments"]
+            },
+            "description": "Create a payment for a booking"
+          },
+          "response": []
+        },
+        {
+          "name": "Get Payment by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{ACCESS_TOKEN}}"
+              }
+            ],
+            "url": {
+              "raw": "{{API_URL}}/api/v1/payments/{{PAYMENT_ID}}",
+              "host": ["{{API_URL}}"],
+              "path": ["api", "v1", "payments", "{{PAYMENT_ID}}"]
+            },
+            "description": "Get payment by ID"
+          },
+          "response": []
+        }
+      ]
+    }
+  ],
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "API_URL",
+      "value": "http://localhost:3000",
+      "type": "string"
+    },
+    {
+      "key": "ACCESS_TOKEN",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "USER_ID",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "ARTIST_ID",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "EVENT_ID",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "BOOKING_ID",
+      "value": "",
+      "type": "string"
+    },
+    {
+      "key": "PAYMENT_ID",
+      "value": "",
+      "type": "string"
+    }
+  ]
+}
